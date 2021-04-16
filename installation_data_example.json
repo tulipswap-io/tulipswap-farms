@@ -1,0 +1,21 @@
+{
+  "private_key": {
+    "alice": ""
+  },
+  "public_key": {
+    "alice": ""
+  },
+  "contract_address": {
+    "tulip_factory": "",
+    "woeth": "",
+    "tulip_router_02": "",
+    "time_lock": "",
+    "tulip_token": "",
+    "master_gardener": "",
+    "tulip_garden": "",
+    "tulip_maker": ""
+  },
+  "provider": {
+    "rpc_endpoint": "https://rpc.oasiseth.org:8545"
+  }
+}
