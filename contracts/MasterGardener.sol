@@ -2,6 +2,8 @@
 
 pragma solidity 0.6.12;
 
+
+
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/SafeERC20.sol";
 import "@openzeppelin/contracts/utils/EnumerableSet.sol";
@@ -20,7 +22,6 @@ import "./TulipToken.sol";
 // Have fun reading it. Hopefully it's bug-free. God bless.
 contract MasterGardener is Ownable, ReentrancyGuard {
     using SafeMath for uint256;
-    using SafeERC20 for IERC20;
 
     // Info of each user.
     struct UserInfo {
@@ -234,14 +235,14 @@ contract MasterGardener is Ownable, ReentrancyGuard {
             }
         }
         if (_amount > 0) {
-            pool.lpToken.safeTransferFrom(
+            pool.lpToken.transferFrom(
                 address(msg.sender),
                 address(this),
                 _amount
             );
             if (pool.depositFeeBP > 0) {
                 uint256 depositFee = _amount.mul(pool.depositFeeBP).div(10000);
-                pool.lpToken.safeTransfer(feeAddress, depositFee);
+                pool.lpToken.transfer(feeAddress, depositFee);
                 user.amount = user.amount.add(_amount).sub(depositFee);
             } else {
                 user.amount = user.amount.add(_amount);
@@ -266,7 +267,7 @@ contract MasterGardener is Ownable, ReentrancyGuard {
         }
         if (_amount > 0) {
             user.amount = user.amount.sub(_amount);
-            pool.lpToken.safeTransfer(address(msg.sender), _amount);
+            pool.lpToken.transfer(address(msg.sender), _amount);
         }
         user.rewardDebt = user.amount.mul(pool.accTulipPerShare).div(1e12);
         emit Withdraw(msg.sender, _pid, _amount);
@@ -279,7 +280,7 @@ contract MasterGardener is Ownable, ReentrancyGuard {
         uint256 amount = user.amount;
         user.amount = 0;
         user.rewardDebt = 0;
-        pool.lpToken.safeTransfer(address(msg.sender), amount);
+        pool.lpToken.transfer(address(msg.sender), amount);
         emit EmergencyWithdraw(msg.sender, _pid, amount);
     }
 

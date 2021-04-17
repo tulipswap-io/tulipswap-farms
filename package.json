@@ -2,10 +2,10 @@
   "name": "@tulipswap/tulip-swap-farms",
   "description": "Core contracts for the tulip-swap-farms protocol",
   "version": "1.0.0",
-  "homepage": "https://tulipswap.finance/",
+  "homepage": "https://tulipswap.io/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/TulipSwap/tulip-swap-core.git"
+    "url": "https://github.com/TulipSwap/tulipswap-farms.git"
   },
   "publishConfig": {
     "registry": "http://registry.npmjs.org"
